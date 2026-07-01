@@ -4,6 +4,9 @@ import Auth from "./Auth"
 import MCQ from "./MCQ"
 import CurrentAffairs from "./CurrentAffairs"
 import Dashboard from "./Dashboard"
+import Flashcards from "./Flashcards"
+import DailyTrivia from "./DailyTrivia"
+import DocChat from "./DocChat"
 
 export default function App() {
   const [user, setUser] = useState(null)
@@ -114,6 +117,36 @@ export default function App() {
           </button>
 
           <button
+            onClick={() => setMode("trivia")}
+            className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition mb-1
+              ${mode === "trivia"
+                ? "bg-blue-50 text-blue-700"
+                : "text-gray-600 hover:bg-gray-100"}`}
+          >
+            ⚡ Daily Trivia
+          </button>
+
+          <button
+            onClick={() => setMode("flashcards")}
+            className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition mb-1
+              ${mode === "flashcards"
+                ? "bg-blue-50 text-blue-700"
+                : "text-gray-600 hover:bg-gray-100"}`}
+          >
+            🃏 Flashcards
+          </button>
+
+          <button
+            onClick={() => setMode("docchat")}
+            className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition mb-1
+              ${mode === "docchat"
+                ? "bg-blue-50 text-blue-700"
+                : "text-gray-600 hover:bg-gray-100"}`}
+          >
+            📄 Chat with Doc
+          </button>
+
+          <button
             onClick={() => setMode("dashboard")}
             className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition mb-3
               ${mode === "dashboard"
@@ -161,6 +194,12 @@ export default function App() {
           <CurrentAffairs user={user} onBack={() => setMode("chat")} />
         ) : mode === "dashboard" ? (
           <Dashboard user={user} onBack={() => setMode("chat")} />
+        ) : mode === "flashcards" ? (
+          <Flashcards user={user} onBack={() => setMode("chat")} />
+        ) : mode === "trivia" ? (
+          <DailyTrivia user={user} onBack={() => setMode("chat")} />
+        ) : mode === "docchat" ? (
+          <DocChat user={user} onBack={() => setMode("chat")} />
         ) : (
           <>
             {/* Answer area */}
